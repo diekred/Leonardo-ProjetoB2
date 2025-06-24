@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "email": "leonardo.diek11@gmail.com",
+    "passwordHash": "$2b$10$F.aa25m9oGEZqJdvAUBOJezREoMm1/TqDMdn/.1lmQuEgYpYiYcJ2",
+    "isAdmin": true
+  },
+  {
+    "id": 2,
+    "email": "gilberto.ferreira666666@gmail.com",
+    "passwordHash": "$2b$10$U2qK/.rHE/vD2s200CjM1u7cwI.QYYEsrFSCRPgZ45TdI0IWa5VO6",
+    "isAdmin": false
+  }
+]

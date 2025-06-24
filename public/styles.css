@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #121212;
+  color: #f1f1f1;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+}
+
+/* Cabeçalho */
+h1 {
+  font-size: 2.8em;
+  color: #e50914;
+  text-align: center;
+  margin-top: 40px;
+  text-shadow: 2px 2px 8px rgba(229, 9, 20, 0.5);
+}
+
+/* Links */
+a {
+  color: #e50914;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Navegação */
+#nav-login {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 16px 24px;
+  gap: 16px;
+  background-color: #1b1b1b;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Botões padrão */
+.botao, button {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.botao:hover, button:hover {
+  background-color: #b00610;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+}
+
+/* Catálogo de Filmes */
+.catalogo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  padding: 40px 60px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Cards */
+.card {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(229, 9, 20, 0.5);
+}
+
+.card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+
+.card h2 {
+  font-size: 1.2em;
+  margin: 12px 16px 4px;
+  color: #fff;
+}
+
+.card p {
+  font-size: 0.95em;
+  color: #ccc;
+  margin: 0 16px 12px;
+}
+
+/* Botão do carrinho */
+#ver-carrinho {
+  display: inline-block;
+  margin-top: 20px;
+  margin-left: 24px;
+  background-color: #e50914;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
+  transition: all 0.3s ease;
+}
+
+#ver-carrinho:hover {
+  background-color: #b00610;
+  transform: translateY(-2px);
+}
+
+/* Carrinho */
+#conteudo-carrinho {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.card-carrinho {
+  display: flex;
+  background-color: #1f1f1f;
+  border-radius: 12px;
+  padding: 20px;
+  gap: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.card-carrinho img {
+  width: 130px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.card-carrinho div {
+  flex: 1;
+  text-align: left;
+}
+
+.card-carrinho h2 {
+  margin: 0 0 10px;
+  font-size: 1.3em;
+  color: #fff;
+}
+
+.card-carrinho p {
+  margin: 5px 0;
+  color: #ccc;
+}
+
+.card-carrinho button {
+  background-color: transparent;
+  border: 1px solid #e50914;
+  color: #e50914;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.card-carrinho button:hover {
+  background-color: #e50914;
+  color: white;
+}
+
+.total-carrinho {
+  text-align: right;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #f1f1f1;
+  margin-top: 10px;
+}
+
+.carrinho-vazio {
+  font-size: 1.1em;
+  text-align: center;
+  margin-top: 60px;
+  color: #999;
+}
+
+#finalizar-compra {
+  display: block;
+  margin: 40px auto;
+}
+
+/* Badge carrinho (opcional) */
+#badge-carrinho {
+  background-color: #e50914;
+  color: white;
+  font-size: 0.85em;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-left: 6px;
+  font-weight: 600;
+  box-shadow: 0 0 6px rgba(229, 9, 20, 0.4);
+}
+/* Estilo da página de login/registro */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #121212;
+  padding: 20px;
+}
+
+.auth-card {
+  background-color: #1f1f1f;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(229, 9, 20, 0.2);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.auth-card h2 {
+  color: #e50914;
+  font-size: 1.8em;
+  margin-bottom: 20px;
+}
+
+.auth-card label {
+  display: block;
+  margin-bottom: 8px;
+  text-align: left;
+  color: #ccc;
+  font-size: 0.95em;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: none;
+  background-color: #2c2c2c;
+  color: white;
+  font-size: 1em;
+  transition: border 0.3s ease;
+}
+
+.auth-card input:focus {
+  outline: none;
+  border: 2px solid #e50914;
+  background-color: #1f1f1f;
+}
+
+.auth-card button {
+  width: 100%;
+  background-color: #e50914;
+  color: white;
+  padding: 12px;
+  font-size: 1em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.auth-card button:hover {
+  background-color: #b00610;
+}
+
+.auth-card .mensagem-erro {
+  color: #ff6b6b;
+  font-size: 0.9em;
+  margin-bottom: 12px;
+}

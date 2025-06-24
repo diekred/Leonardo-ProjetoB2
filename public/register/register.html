@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Registrar - LeleuFlix</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-card">
+      <h2>Criar Conta</h2>
+      <form id="form-register" novalidate>
+        <div class="mensagem-erro" id="mensagem"></div>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" required />
+
+        <label for="confirm-password">Confirmar Senha:</label>
+        <input type="password" id="confirm-password" name="confirm-password" required />
+
+        <button type="submit">Registrar</button>
+      </form>
+
+      <p style="margin-top: 20px; color: #aaa;">
+        Já tem conta? <a href="/login/login.html">Entrar</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="register.js"></script>
+</body>
+</html>

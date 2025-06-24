@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - LeleuFlix</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-card">
+      <h2>Entrar no LeleuFlix</h2>
+      <form id="form-login">
+        <div class="mensagem-erro" id="mensagem"></div>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" placeholder="••••••••" required>
+
+        <button type="submit">Entrar</button>
+      </form>
+      <p style="margin-top: 20px; color: #aaa; font-size: 0.9em;">
+        Ainda não tem conta? <a href="/register/register.html">Registrar</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>

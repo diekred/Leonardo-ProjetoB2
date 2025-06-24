@@ -1,0 +1,50 @@
+const express = require('express');
+const fs = require('fs');
+const path = require('path');
+
+const app = express();
+const PORT = 3000;
+
+// Servir arquivos estáticos em public/
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
+
+// Endpoint para salvar pedido em CSV
+app.post('/salvar-pedido', (req, res) => {
+  const pedido = req.body;
+  const timestamp = new Date().toISOString();
+  // Campos esperados: nome, email, itens (array de objetos com id, titulo, preco), metodoPagamento, detalhesPagamento
+  const itensStr = Array.isArray(pedido.itens) 
+    ? pedido.itens.map(item => item.titulo).join('|') 
+    : '';
+  const linha = [
+    timestamp,
+    pedido.nome || '',
+    pedido.email || '',
+    itensStr,
+    pedido.metodoPagamento || '',
+    JSON.stringify(pedido.detalhesPagamento || {})
+  ].join(',') + '\n';
+
+  const dataDir = path.join(__dirname, 'data');
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir);
+  }
+  const filePath = path.join(dataDir, 'pedidos.csv');
+  // Se não existir, cria com cabeçalho
+  if (!fs.existsSync(filePath)) {
+    const header = 'timestamp,nome,email,itens,metodoPagamento,detalhesPagamento\n';
+    fs.writeFileSync(filePath, header);
+  }
+  fs.appendFile(filePath, linha, err => {
+    if (err) {
+      console.error('Erro ao salvar CSV:', err);
+      return res.status(500).send({ sucesso: false, mensagem: 'Erro ao salvar pedido.' });
+    }
+    res.send({ sucesso: true, mensagem: 'Pedido salvo com sucesso.' });
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
