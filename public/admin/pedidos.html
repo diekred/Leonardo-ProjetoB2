@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel do Administrador</title>
+  <style>
+    body {
+      background-color: #f9f9f9;
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1, h2 {
+      color: #222;
+    }
+    .tabs {
+      display: flex;
+      margin-bottom: 10px;
+    }
+    .tab {
+      padding: 10px 20px;
+      background-color: #eee;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      margin-right: 5px;
+    }
+    .tab.active {
+      background-color: white;
+      border-bottom: 1px solid white;
+      font-weight: bold;
+    }
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, button {
+      padding: 8px;
+      margin-top: 5px;
+    }
+    button {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Painel do Administrador</h1>
+
+  <a href="/index.html" class="voltar">⬅️ Voltar para o Catálogo</a>
+
+  <div class="tabs">
+    <div class="tab active" onclick="trocarAba('filmes')">🎬 Gerenciar Filmes</div>
+    <div class="tab" onclick="trocarAba('admins')">👥 Gerenciar Admins</div>
+  </div>
+
+  <!-- Seção: Gerenciar Filmes -->
+  <div id="secao-filmes" class="section active">
+    <h2>Adicionar Filme</h2>
+    <div class="card">
+      <form id="form-adicionar">
+        <label>Título: <input type="text" id="titulo" required></label>
+        <label>Descrição: <input type="text" id="descricao" required></label>
+        <label>Imagem (URL): <input type="url" id="imagem" required></label>
+        <label>Preço: <input type="number" id="preco" step="0.01" required></label>
+        <button type="submit">➕ Adicionar Filme</button>
+      </form>
+    </div>
+
+    <h2>Catálogo de Filmes</h2>
+    <div id="lista-filmes"></div>
+  </div>
+
+  <!-- Seção: Gerenciar Admins -->
+  <div id="secao-admins" class="section">
+    <h2>Promover Usuário a Admin</h2>
+    <div class="card">
+      <form id="form-promover">
+        <label>ID do Usuário: <input type="number" id="promover-id" required></label>
+        <button type="submit">🚀 Promover</button>
+      </form>
+    </div>
+
+    <h2>Lista de Admins</h2>
+    <div class="card">
+      <div id="lista-admins">🔄 Carregando...</div>
+    </div>
+  </div>
+
+  <script>
+    function trocarAba(aba) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelector(`.tab[onclick*="${aba}"]`).classList.add('active');
+      document.getElementById(`secao-${aba}`).classList.add('active');
+
+      if (aba === 'admins') carregarListaAdmins();
+      if (aba === 'filmes') carregarFilmes();
+    }
+
+    // Filmes
+    async function carregarFilmes() {
+      const resp = await fetch('/api/filmes');
+      const filmes = await resp.json();
+      const lista = document.getElementById('lista-filmes');
+      lista.innerHTML = '';
+
+      filmes.forEach(filme => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <h3>${filme.titulo} (ID: ${filme.id})</h3>
+          <p>${filme.descricao}</p>
+          <p>Preço: R$ ${filme.preco.toFixed(2)}</p>
+          <img src="${filme.imagem}" width="150"><br><br>
+          <button onclick="excluirFilme(${filme.id})">🗑️ Excluir</button>
+          <button onclick="mostrarFormularioEditar(${filme.id})">✏️ Editar</button>
+          <div id="editar-${filme.id}" style="display:none; margin-top:10px;">
+            <label>Título: <input id="edit-titulo-${filme.id}" value="${filme.titulo}"></label>
+            <label>Descrição: <input id="edit-descricao-${filme.id}" value="${filme.descricao}"></label>
+            <label>Imagem: <input id="edit-imagem-${filme.id}" value="${filme.imagem}"></label>
+            <label>Preço: <input id="edit-preco-${filme.id}" type="number" step="0.01" value="${filme.preco}"></label>
+            <button onclick="salvarEdicaoFilme(${filme.id})">💾 Salvar</button>
+            <button onclick="cancelarEdicao(${filme.id})">❌ Cancelar</button>
+          </div>
+        `;
+        lista.appendChild(card);
+      });
+    }
+
+    function mostrarFormularioEditar(id) {
+      document.getElementById(`editar-${id}`).style.display = 'block';
+    }
+
+    function cancelarEdicao(id) {
+      document.getElementById(`editar-${id}`).style.display = 'none';
+    }
+
+    async function salvarEdicaoFilme(id) {
+      const data = {
+        titulo: document.getElementById(`edit-titulo-${id}`).value,
+        descricao: document.getElementById(`edit-descricao-${id}`).value,
+        imagem: document.getElementById(`edit-imagem-${id}`).value,
+        preco: parseFloat(document.getElementById(`edit-preco-${id}`).value)
+      };
+      await fetch('/api/admin/filmes/' + id, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      });
+      carregarFilmes();
+    }
+
+    document.getElementById('form-adicionar').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = {
+        titulo: document.getElementById('titulo').value,
+        descricao: document.getElementById('descricao').value,
+        imagem: document.getElementById('imagem').value,
+        preco: parseFloat(document.getElementById('preco').value)
+      };
+      await fetch('/api/admin/filmes', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      });
+      e.target.reset();
+      carregarFilmes();
+    });
+
+    async function excluirFilme(id) {
+      if (!confirm('Confirma excluir este filme?')) return;
+      await fetch('/api/admin/filmes/' + id, { method: 'DELETE' });
+      carregarFilmes();
+    }
+
+    // Admins
+    document.getElementById('form-promover').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const userId = document.getElementById('promover-id').value;
+      await fetch('/api/admin/promover/' + userId, { method: 'PUT' });
+      alert('Usuário promovido!');
+      e.target.reset();
+      carregarListaAdmins();
+    });
+
+    async function carregarListaAdmins() {
+      const div = document.getElementById('lista-admins');
+      div.innerHTML = '🔄 Carregando...';
+      try {
+        const resp = await fetch('/api/admin/listar');
+        if (!resp.ok) throw new Error('Erro na resposta da API');
+        const admins = await resp.json();
+
+        if (!Array.isArray(admins) || admins.length === 0) {
+          div.innerHTML = '<p>⚠️ Nenhum administrador encontrado.</p>';
+          return;
+        }
+
+        div.innerHTML = '';
+        admins.forEach(admin => {
+          const p = document.createElement('p');
+          p.innerHTML = `👤 <strong>${admin.nome}</strong> (ID: ${admin.id}) 
+            <button onclick="removerAdmin(${admin.id})">❌ Remover</button>`;
+          div.appendChild(p);
+        });
+      } catch (err) {
+        div.innerHTML = '<p>❌ Erro ao carregar administradores.</p>';
+        console.error('Erro ao buscar admins:', err);
+      }
+    }
+
+    async function removerAdmin(id) {
+      if (!confirm('Tem certeza que deseja remover este administrador?')) return;
+      await fetch('/api/admin/remover/' + id, { method: 'DELETE' });
+      alert('Administrador removido!');
+      carregarListaAdmins();
+    }
+
+    // Inicialização
+    carregarFilmes();
+  </script>
+
+</body>
+</html>

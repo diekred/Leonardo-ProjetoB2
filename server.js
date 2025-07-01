@@ -236,3 +236,83 @@ app.get('/api/admin/pedidos', ensureAdmin, (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
+// ===== ROTAS PARA CATÁLOGO DE FILMES (ADMIN) =====
+
+const catalogoPath = path.join(__dirname, 'data', 'catalogo.json');
+
+// GET /api/filmes - público
+app.get('/api/filmes', (req, res) => {
+  const filmes = readJson(catalogoPath);
+  res.json(filmes);
+});
+
+// POST /api/admin/filmes - adicionar novo filme
+app.post('/api/admin/filmes', ensureAdmin, (req, res) => {
+  const novo = req.body;
+  if (!novo.titulo || !novo.descricao || !novo.imagem || typeof novo.preco !== 'number') {
+    return res.status(400).json({ erro: 'Dados inválidos' });
+  }
+
+  const filmes = readJson(catalogoPath);
+  novo.id = filmes.length ? Math.max(...filmes.map(f => f.id)) + 1 : 1;
+  filmes.push(novo);
+  writeJson(catalogoPath, filmes);
+  res.json({ sucesso: true, filme: novo });
+});
+
+// PUT /api/admin/filmes/:id - editar filme existente
+app.put('/api/admin/filmes/:id', ensureAdmin, (req, res) => {
+  const id = parseInt(req.params.id);
+  const filmes = readJson(catalogoPath);
+  const index = filmes.findIndex(f => f.id === id);
+  if (index === -1) return res.status(404).json({ erro: 'Filme não encontrado' });
+
+  filmes[index] = { ...filmes[index], ...req.body, id };
+  writeJson(catalogoPath, filmes);
+  res.json({ sucesso: true, filme: filmes[index] });
+});
+
+// DELETE /api/admin/filmes/:id - remover filme
+app.delete('/api/admin/filmes/:id', ensureAdmin, (req, res) => {
+  const id = parseInt(req.params.id);
+  const filmes = readJson(catalogoPath);
+  const atualizados = filmes.filter(f => f.id !== id);
+  writeJson(catalogoPath, atualizados);
+  res.json({ sucesso: true });
+});
+
+// PUT /api/admin/promover/:id - tornar usuário admin
+app.put('/api/admin/promover/:id', ensureAdmin, (req, res) => {
+  const userId = parseInt(req.params.id);
+  const users = readJson(usersFilePath);
+  const user = users.find(u => u.id === userId);
+  if (!user) return res.status(404).json({ erro: 'Usuário não encontrado' });
+
+  user.isAdmin = true;
+  writeJson(usersFilePath, users);
+  res.json({ sucesso: true, user });
+});
+
+// GET /api/admin/listar - listar admins
+app.get('/api/admin/listar', ensureAdmin, (req, res) => {
+  const users = readJson(usersFilePath);
+  const admins = users.filter(u => u.isAdmin).map(u => ({
+    id: u.id,
+    email: u.email,
+    nome: u.email.split('@')[0] // opcional: nome derivado do email
+  }));
+  res.json(admins);
+});
+
+// DELETE /api/admin/remover/:id - remover admin (rebaixar para usuário comum)
+app.delete('/api/admin/remover/:id', ensureAdmin, (req, res) => {
+  const userId = parseInt(req.params.id);
+  const users = readJson(usersFilePath);
+  const user = users.find(u => u.id === userId);
+
+  if (!user) return res.status(404).json({ erro: 'Usuário não encontrado' });
+
+  user.isAdmin = false;
+  writeJson(usersFilePath, users);
+  res.json({ sucesso: true, mensagem: 'Admin removido com sucesso' });
+});

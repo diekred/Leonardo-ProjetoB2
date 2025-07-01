@@ -1,32 +1,18 @@
 {
   "1": [
     {
+      "id": 2,
+      "titulo": "The Godfather",
+      "descricao": "A historia de bla bla bla",
+      "imagem": "https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_.jpg",
+      "preco": 21.37
+    },
+    {
       "id": 10,
       "titulo": "Star Wars: Episode IV – A New Hope",
       "descricao": "Luke Skywalker se junta à Rebelião para combater o Império e salvar a galáxia.",
       "imagem": "https://m.media-amazon.com/images/I/81CIXJxQ3TL.jpg",
       "preco": 20.25
-    },
-    {
-      "id": 16,
-      "titulo": "Avengers: Endgame",
-      "descricao": "Os Vingadores se reúnem para desfazer o caos causado por Thanos.",
-      "imagem": "https://m.media-amazon.com/images/I/81ExhpBEbHL._AC_SY679_.jpg",
-      "preco": 20.21
-    },
-    {
-      "id": 13,
-      "titulo": "Jurassic Park",
-      "descricao": "Um parque de dinossauros clonados se transforma em um pesadelo.",
-      "imagem": "https://upload.wikimedia.org/wikipedia/pt/e/e7/Jurassic_Park_poster.jpg",
-      "preco": 15.76
-    },
-    {
-      "id": 3,
-      "titulo": "The Dark Knight",
-      "descricao": "Batman enfrenta o Coringa, um criminoso caótico que leva Gotham à beira da anarquia.",
-      "imagem": "https://upload.wikimedia.org/wikipedia/pt/b/b7/TheDarkKnightRises.jpg",
-      "preco": 17.28
     }
   ],
   "2": []

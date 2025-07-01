@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
+/* ========= RESET E BASE ========= */
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +14,7 @@ body {
   min-height: 100vh;
 }
 
-/* Cabeçalho */
+/* ========= TIPOGRAFIA ========= */
 h1 {
   font-size: 2.8em;
   color: #e50914;
@@ -22,14 +23,13 @@ h1 {
   text-shadow: 2px 2px 8px rgba(229, 9, 20, 0.5);
 }
 
-/* Links */
 a {
   color: #e50914;
   text-decoration: none;
   font-weight: 500;
 }
 
-/* Navegação */
+/* ========= NAVEGAÇÃO ========= */
 #nav-login {
   display: flex;
   justify-content: flex-end;
@@ -40,7 +40,7 @@ a {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Botões padrão */
+/* ========= BOTÕES ========= */
 .botao, button {
   background-color: #e50914;
   color: white;
@@ -59,7 +59,26 @@ a {
   box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
 }
 
-/* Catálogo de Filmes */
+/* ========= BOTÃO VOLTAR ========= */
+.voltar {
+  display: block;
+  margin: 30px auto;
+  text-align: center;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #e50914;
+  padding: 12px 20px;
+  border-radius: 6px;
+  background-color: transparent;
+  transition: color 0.3s ease;
+}
+
+.voltar:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+/* ========= CATÁLOGO ========= */
 .catalogo {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -69,7 +88,7 @@ a {
   margin: auto;
 }
 
-/* Cards */
+/* ========= CARD GERAL ========= */
 .card {
   background-color: #1e1e1e;
   border-radius: 12px;
@@ -87,6 +106,9 @@ a {
   width: 100%;
   height: 320px;
   object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  margin-top: 8px;
 }
 
 .card h2 {
@@ -101,11 +123,10 @@ a {
   margin: 0 16px 12px;
 }
 
-/* Botão do carrinho */
+/* ========= BOTÃO CARRINHO ========= */
 #ver-carrinho {
   display: inline-block;
-  margin-top: 20px;
-  margin-left: 24px;
+  margin: 20px 0 0 24px;
   background-color: #e50914;
   color: white;
   padding: 12px 20px;
@@ -120,7 +141,7 @@ a {
   transform: translateY(-2px);
 }
 
-/* Carrinho */
+/* ========= CARRINHO ========= */
 #conteudo-carrinho {
   padding: 40px 20px;
   max-width: 1000px;
@@ -151,9 +172,9 @@ a {
 }
 
 .card-carrinho h2 {
-  margin: 0 0 10px;
   font-size: 1.3em;
   color: #fff;
+  margin-bottom: 10px;
 }
 
 .card-carrinho p {
@@ -198,7 +219,7 @@ a {
   margin: 40px auto;
 }
 
-/* Badge carrinho (opcional) */
+/* ========= BADGE CARRINHO ========= */
 #badge-carrinho {
   background-color: #e50914;
   color: white;
@@ -209,7 +230,8 @@ a {
   font-weight: 600;
   box-shadow: 0 0 6px rgba(229, 9, 20, 0.4);
 }
-/* Estilo da página de login/registro */
+
+/* ========= AUTENTICAÇÃO ========= */
 .auth-container {
   display: flex;
   justify-content: center;
@@ -282,4 +304,60 @@ a {
   color: #ff6b6b;
   font-size: 0.9em;
   margin-bottom: 12px;
+}
+
+/* ========= FORMULÁRIO DE PAGAMENTO ========= */
+.form-cartao {
+  background-color: #1f1f1f;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: auto;
+  box-shadow: 0 0 12px rgba(229, 9, 20, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #f1f1f1;
+}
+
+.form-cartao label {
+  font-size: 0.95em;
+}
+
+.form-cartao input {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background-color: #2c2c2c;
+  color: white;
+}
+
+.form-cartao input:focus {
+  outline: none;
+  border: 2px solid #e50914;
+  background-color: #1f1f1f;
+}
+
+/* ========= QR CODE ========= */
+.qr-container {
+  background-color: #1f1f1f;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #f1f1f1;
+}
+
+.qr-code {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 16px;
+}
+
+.info {
+  font-size: 0.95em;
+  color: #ccc;
 }
