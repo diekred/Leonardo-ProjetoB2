@@ -10,5 +10,11 @@
     "email": "gilberto.ferreira666666@gmail.com",
     "passwordHash": "$2b$10$U2qK/.rHE/vD2s200CjM1u7cwI.QYYEsrFSCRPgZ45TdI0IWa5VO6",
     "isAdmin": false
+  },
+  {
+    "id": 3,
+    "email": "astolfo@gmail.com",
+    "passwordHash": "$2b$10$e3MGrlHB8anQ1L2ilQCqpOWCJXp4BiRXjlibVDgm.encI6OeFldyW",
+    "isAdmin": false
   }
 ]
