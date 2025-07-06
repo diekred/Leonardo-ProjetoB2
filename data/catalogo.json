@@ -11,7 +11,7 @@
     "titulo": "The Godfather",
     "descricao": "A historia de bla bla bla",
     "imagem": "https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_.jpg",
-    "preco": 21.37
+    "preco": 27.37
   },
   {
     "id": 3,
@@ -40,13 +40,6 @@
     "descricao": "Um ladrão que invade sonhos é contratado para implantar uma ideia na mente de um CEO.",
     "imagem": "https://m.media-amazon.com/images/I/81p+xe8cbnL._AC_SY679_.jpg",
     "preco": 16.9
-  },
-  {
-    "id": 7,
-    "titulo": "Fight Club",
-    "descricao": "Um homem insatisfeito forma um clube secreto de luta com um vendedor de sabão carismático.",
-    "imagem": "https://m.media-amazon.com/images/I/51v5ZpFyaFL._AC_.jpg",
-    "preco": 13.36
   },
   {
     "id": 8,

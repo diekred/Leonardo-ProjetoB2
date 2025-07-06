@@ -1,18 +1,18 @@
 {
   "1": [
     {
-      "id": 2,
-      "titulo": "The Godfather",
-      "descricao": "A historia de bla bla bla",
-      "imagem": "https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_.jpg",
-      "preco": 21.37
-    },
-    {
       "id": 10,
       "titulo": "Star Wars: Episode IV – A New Hope",
       "descricao": "Luke Skywalker se junta à Rebelião para combater o Império e salvar a galáxia.",
       "imagem": "https://m.media-amazon.com/images/I/81CIXJxQ3TL.jpg",
       "preco": 20.25
+    },
+    {
+      "id": 2,
+      "titulo": "The Godfather",
+      "descricao": "A historia de bla bla bla",
+      "imagem": "https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_.jpg",
+      "preco": 27.37
     }
   ],
   "2": []
